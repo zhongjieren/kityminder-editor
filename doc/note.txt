@@ -1,0 +1,5 @@
+install nodeJs
+npm config set prefix "C:\project\software\nodejs"
+npm config set cache "C:\project\software\nodejs\cache"
+
+npm run init
