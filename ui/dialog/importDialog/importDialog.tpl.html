@@ -1,0 +1,14 @@
+<div class="modal-header">
+	<h3 class="modal-title">上传</h3>
+	<i class="glyphicon glyphicon-remove close-btn" ng-click="cancel()"></i>
+</div>
+<div class="modal-body clearfix">
+	<form action="">
+		<div class="form-group">
+			<label for="uploadFile">选择本地文件</label><input type="file"
+				id="uploadFile" accept="{{ accepts.join() }}"
+				onchange="angular.element(this).scope().readFile(this.files[0])">
+			<p class="help-block">{{ acceptsInfo }}</p>
+		</div>
+	</form>
+</div>

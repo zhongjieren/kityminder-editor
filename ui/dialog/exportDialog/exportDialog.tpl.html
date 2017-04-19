@@ -1,0 +1,11 @@
+<div class="modal-header">
+	<h3 class="modal-title">导出脑图</h3>
+	<i class="glyphicon glyphicon-remove close-btn" ng-click="cancel()"></i>
+</div>
+<div class="modal-body clearfix">
+	<ul class="protocol-list">
+		<li ng-repeat="protocol in protocols" ng-click="exportFile(protocol)"><span>{{
+				protocol.fileDescription + \' (\' + protocol.fileExtension + \')\'
+				}}</span></li>
+	</ul>
+</div>

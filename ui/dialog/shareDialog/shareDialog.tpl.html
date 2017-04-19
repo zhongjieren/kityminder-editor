@@ -1,0 +1,64 @@
+<div class="modal-header">
+	<h3 class="modal-title">分享脑图</h3>
+	<i class="glyphicon glyphicon-remove close-btn" ng-click="cancel()"></i>
+</div>
+<div class="modal-body clearfix">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">查看链接</h3>
+			<button type="button" class="btn btn-default open-view-url"
+				ng-if="viewUrlOpen" ng-click="toggleViewUrlStatus()">关闭链接</button>
+			<button type="button" class="btn btn-default open-view-url"
+				ng-if="!viewUrlOpen" ng-click="toggleViewUrlStatus()">打开链接</button>
+		</div>
+		<div class="panel-body">
+			<div class="form-group col-md-12 col-xs-12 col-sm-12">
+				<div class="input-group col-md-12 col-xs-12 col-sm-12">
+					<input type="text" class="form-control" id="view-url"
+						ng-disabled="!viewUrlOpen" ng-model="viewUrl" readonly> <span
+						class="input-group-btn"><button type="button"
+							class="btn btn-default" clip-copy="viewUrlData"
+							clip-click="copyViewUrl()"
+							ng-disabled="!viewUrlOpen || viewUrlCopyedText == \'已复制\'"
+							ng-bind="viewUrlCopyedText || \'复制链接\'"></button></span>
+				</div>
+			</div>
+			<div class="col-md-12 col-xs-12 col-sm-12 url-info"
+				ng-disabled="!viewUrlOpen"
+				ng-show="viewPeriodOpen || viewPasswordOpen">
+				当前链接: <span ng-show="viewPeriodOpen">有效期为&nbsp;<span
+					class="view-period" ng-show="viewPeriodEdit == false"
+					ng-click="viewPeriodEdit = !viewPeriodEdit">{{ viewPeriod }}</span>
+					<input type="text" class="form-control view-period-input"
+					id="view-valid-period" pattern="[0-9]+" maxlength="5" title="请输入数字"
+					ng-show="viewPeriodEdit == true" ng-disabled="!viewUrlOpen"
+					ng-model="viewPeriod"
+					ng-blur="setViewOption(\'changePeriod\'); viewPeriodEdit=false">&nbsp;分钟
+				</span> <span ng-show="viewPasswordOpen">密码为&nbsp; <span
+					class="view-password" ng-show="viewPasswordEdit == false"
+					ng-click="viewPasswordEdit = !viewPasswordEdit">{{
+						viewPassword }}</span> <input type="text"
+					class="form-control view-password-input" id="view-password"
+					pattern="[0-9A-z]{1,4}" maxlength="4" title="请输入4位密码"
+					ng-show="viewPasswordEdit == true" ng-disabled="!viewUrlOpen"
+					ng-change="checkValue(viewPassword)"
+					ng-blur="setViewOption(\'changePassword\'); viewPasswordEdit=false"
+					ng-model="viewPassword"></span>
+			</div>
+			<div class="form-group col-md-12 col-xs-12 col-sm-12 set-option">
+				<a href
+					ng-click="viewPeriodOpen = true; setViewOption(\'addPeriod\');"
+					ng-disabled="!viewUrlOpen" ng-show="viewPeriodOpen == false">设置有效期</a>
+				<a href
+					ng-click="viewPeriodOpen = false; setViewOption(\'deletePeriod\');"
+					ng-disabled="!viewUrlOpen" ng-show="viewPeriodOpen == true">删除有效期</a>
+				<a href
+					ng-click="viewPasswordOpen = true; setViewOption(\'addPassword\');"
+					ng-disabled="!viewUrlOpen" ng-show="viewPasswordOpen == false">设置密码</a>
+				<a href
+					ng-click="viewPasswordOpen = false; setViewOption(\'deletePassword\');"
+					ng-disabled="!viewUrlOpen" ng-show="viewPasswordOpen == true">删除密码</a>
+			</div>
+		</div>
+	</div>
+</div>

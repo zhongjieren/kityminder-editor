@@ -1,0 +1,109 @@
+<div class="main-menu" tabindex="-1">
+	<ul class="tab-head">
+		<li class="close-menu" ng-click="closeMenu()"><i class="back"></i></li>
+		<li ng-repeat="tab in tabs" ng-class="{\'active\': current == tab}"
+			ng-click="select(tab)"><span ng-bind="tab.name"></span></li>
+	</ul>
+	<div class="tab-body">
+		<h2 ng-bind="current.name" class="title"></h2>
+		<div class="tab-pane" ng-class="{\'active\': current.name == \'新建\'}">
+			<ul class="template-list">
+				<li ng-repeat="t in templateList" ng-click="touchFromTemplate(t)"
+					class="template-item {{ t.class }}"><span ng-bind="t.name"></span></li>
+			</ul>
+		</div>
+		<div class="tab-pane open"
+			ng-class="{\'active\': current.name == \'打开\'}">
+			<h3 class="latest-files-title">最近使用的文件</h3>
+			<ul class="latest-files">
+				<li ng-repeat="f in file.latestFiles" ng-click="open(f.file_guid)"><span
+					class="icon"></span> <span class="filename">{{ f.file_name +
+						f.ext_name }}</span> <span class="info">{{ f.last_modified_time |
+						timer }}</span></li>
+			</ul>
+			<a class="go-home" href="/home" target="_self"
+				title="{{ \'see_more_at_home\' | translate }}">{{
+				\'see_more_at_home\' | translate }}..</a>
+			<div class="item import-file" ng-click="importFile()">
+				<i class="glyphicon glyphicon-open icon"></i> <span
+					class="item-name">打开本地文件</span> <span class="item-info">上传本地脑图文件，并用脑图编辑</span>
+			</div>
+		</div>
+		<div class="tab-pane save-as"
+			ng-class="{\'active\': current.name == \'另存为\'}">
+			<ul class="items">
+				<li class="item" ng-click="saveAs()"><i
+					class="glyphicon glyphicon-duplicate icon"></i> <span
+					class="item-name">另存为</span> <span class="item-info">保存副本到我的文档</span></li>
+				<li class="item" ng-click="renameDialog()"
+					ng-show="role === \'editor\'"><i
+					class="glyphicon glyphicon-edit icon"></i> <span class="item-name">重命名</span>
+					<span class="item-info">重命名此文件</span></li>
+				<li class="item" ng-click="exportFile()"><i
+					class="glyphicon glyphicon-save icon"></i> <span class="item-name">导出</span>
+					<span class="item-info">将文件导出到本地（不包含第三方格式，.km 文件除外）</span></li>
+			</ul>
+			<h3 class="no-save-notice-title">“保存”按钮在哪里？</h3>
+			<span class="no-save-notice-body">没有“保存”按钮，因为正在自动保存您的脑图。</span>
+		</div>
+		<div class="tab-pane share"
+			ng-class="{\'active\': current.name == \'共享\'}">
+			<div class="item share-file" ng-click="share()">
+				<i class="glyphicon glyphicon-share icon"></i> <span
+					class="item-name">与人共享</span> <span class="item-info">邀请其他人查看此文档</span>
+			</div>
+			<a class="go-home" href="/myshare" target="_self"
+				title="{{ \'see_shared_files\' | translate }}">{{
+				\'see_shared_files\' | translate }}..</a>
+		</div>
+		<div class="tab-pane version"
+			ng-class="{\'active\': current.name == \'历史版本\'}">
+			<ul class="latest-versions">
+				<h3 class="no-history-notice"
+					ng-show="file.latestVersions.length == 0">目前还没有历史版本</h3>
+				<li ng-repeat="v in file.latestVersions"
+					ng-show="file.latestVersions.length != 0"><i class="icon"></i>
+					<span class="filename">创建于 {{ v.create_time}}</span> <span
+					class="info">{{ v.creater_name }} <span
+						ng-show="v.size !== null">&nbsp;{{ v.size | sizer }}&nbsp;</span><a
+						href ng-click="importHistory(v.bos_guid)">还原</a> <span
+						ng-show="$index == 0">当前版本</span></span></li>
+			</ul>
+		</div>
+		<div class="tab-pane help"
+			ng-class="{\'active\': current.name == \'帮助\'}">
+			<div class="item shortcut-item" ng-click="shortcut()">
+				<i class="glyphicon glyphicon-flash icon"></i> <span
+					class="item-name">快捷键</span> <span class="item-info">查看脑图的快捷键</span>
+			</div>
+		</div>
+		<div class="tab-pane feedback"
+			ng-class="{\'active\': current.name == \'反馈\'}">
+			<p>
+				百度脑图当前版本：<a
+					href="https://github.com/fex-team/kityminder-core/releases/tag/v{{ version }}"
+					target="_blank">{{ version }}</a>
+			</p>
+			<p>
+				欢迎给我们反馈问题，以下是我们的反馈渠道：<br>（反馈之前您可以查看下 <a target="_blank"
+					href="user/faq">FAQ</a>）
+			</p>
+			<ul class="contact-content">
+				<li class="email"><span>邮件组</span> <a
+					href="mailto:kity@baidu.com?subject=脑图使用反馈">kity@baidu.com</a></li>
+				<li class="qq"><p>
+						<span>6群</span>
+						<del>256469104</del>
+						<i>(已满)</i>
+					</p>
+					<p>
+						<span>7群</span> <a>471462554</a><i>(可加)</i>
+					</p></li>
+				<li class="tieba"><span>贴吧</span> <a target="_blank"
+					href="http://tieba.baidu.com/f?kw=%B0%D9%B6%C8%C4%D4%CD%BC">百度脑图</a></li>
+				<li class="github"><span>Github</span> <a target="_blank"
+					href="https://github.com/fex-team/kityminder-editor/issues/new">Issues</a></li>
+			</ul>
+		</div>
+	</div>
+</div>

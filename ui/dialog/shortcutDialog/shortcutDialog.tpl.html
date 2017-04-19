@@ -1,0 +1,13 @@
+<div class="modal-header">
+	<h3 class="modal-title">快捷键</h3>
+	<i class="glyphicon glyphicon-remove close-btn" ng-click="cancel()"></i>
+</div>
+<div class="modal-body shortcut-dialog">
+	<section ng-repeat="group in shortcut">
+		<h3>{{ group.groupName }}</h3>
+		<div class="shortcut-group" ng-repeat="k in group.groupItem">
+			<span class="shortcut" ng-bind-html="genKeyDOM(k.key) | trusted"></span>
+			<span class="description">{{ k.desc }}</span>
+		</div>
+	</section>
+</div>

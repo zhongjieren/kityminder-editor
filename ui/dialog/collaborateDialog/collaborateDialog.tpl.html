@@ -1,0 +1,44 @@
+<div class="modal-header">
+	<h3 class="modal-title">用户协作</h3>
+</div>
+<div class="modal-body clearfix">
+	<div class="col-md-12 col-xs-12 col-sm-12 current-user-title">当前用户:</div>
+	<ul class="current-user-list">
+		<li class="col-md-12 col-xs-12 col-sm-12 current-user-item"><div
+				class="col-md-3 col-xs-3 col-sm-3 user-name">用户 1</div>
+			<div class="col-md-3 col-xs-3 col-sm-3 input-group-btn">
+				<button type="button" class="btn btn-default dropdown-toggle"
+					data-toggle="dropdown" aria-expanded="false">
+					可查看 <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu dropdown-menu-right" role="menu">
+					<li><a href="#">可查看</a></li>
+					<li><a href="#">可编辑</a></li>
+				</ul>
+			</div>
+			<button type="button" class="btn btn-default delete-user"
+				ng-click="delete-user();">删除</button></li>
+	</ul>
+	<div class="col-md-12 col-xs-12 col-sm-12 add-user-title">新增协作用户</div>
+	<div class="col-md-12 col-xs-12 col-sm-12">
+		<div class="input-group col-md-10 col-xs-10 col-sm-10">
+			<input type="text" class="form-control" aria-label="...">
+			<div class="input-group-btn">
+				<button type="button" class="btn btn-default dropdown-toggle"
+					data-toggle="dropdown" aria-expanded="false">
+					可查看 <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu dropdown-menu-right" role="menu">
+					<li><a href="#">可查看</a></li>
+					<li><a href="#">可编辑</a></li>
+				</ul>
+			</div>
+		</div>
+		<button type="button" class="btn btn-default add-user"
+			ng-click="add-user();">增加</button>
+	</div>
+	<div class="col-md-12 col-xs-12 col-sm-12 frequent-contact-title">常用联系人</div>
+	<ul class="frequent-contact-list">
+		<li class="frequent-contact-item">User 01</li>
+	</ul>
+</div>

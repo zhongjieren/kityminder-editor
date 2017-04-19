@@ -1,0 +1,7 @@
+<div class="filename-wrap">
+	<span class="filename" ng-show="!editMode"
+		ng-click="editMode = true; oldName = file.fileName"
+		ng-bind="file.fileName"></span> <input class="filename-edit"
+		type="text" ng-show="editMode" ng-keydown="rename($event)"
+		ng-blur="rename($event);" ng-model="file.fileName">
+</div>

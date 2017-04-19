@@ -1,9 +1,9 @@
 /*!
  * ====================================================
- * kityminder-editor - v1.0.56 - 2016-07-06
+ * kityminder-editor - v1.0.59 - 2017-04-19
  * https://github.com/fex-team/kityminder-editor
  * GitHub: https://github.com/fex-team/kityminder-editor 
- * Copyright (c) 2016 ; Licensed 
+ * Copyright (c) 2017 ; Licensed 
  * ====================================================
  */
 
@@ -901,7 +901,7 @@ _p[12] = {
                     }
                 });
                 minder.on("dblclick", function() {
-                    if (minder.getSelectedNode()) {
+                    if (minder.getSelectedNode() && minder._status !== "readonly") {
                         editText();
                     }
                 });
@@ -2083,6 +2083,11 @@ angular.module('kityminderEditor').run(['$templateCache', function($templateCach
   );
 
 
+  $templateCache.put('ui/directive/editorHead/editorHead.html',
+    "<header ng-intro-options=\"introOptions\" ng-intro-method=\"startIntro\" ng-intro-oncomplete=\"finishIntro\" ng-intro-onexit=\"finishIntro\" ng-intro-onchange=\"closeMenu\" class=\"ng-isolate-scope\"><span class=\"moreservice\" style=\"float: left; width: 40px; height: 40px; border-right: 1px solid rgba(255, 255, 255, 0.498039); z-index: 1\"></span><div class=\"file-menu\" ng-click=\"openMenu()\"><span class=\"product-title\">百度脑图</span> <span class=\"caret\"></span></div><div class=\"filename-wrap ng-isolate-scope\" file=\"file\"><span class=\"filename ng-binding\" ng-show=\"!editMode\" ng-click=\"editMode = true; oldName = file.fileName\" ng-bind=\"file.fileName\">新建脑图</span> <input class=\"filename-edit ng-pristine ng-untouched ng-valid ng-hide\" type=\"text\" ng-show=\"editMode\" ng-keydown=\"rename($event)\" ng-blur=\"rename($event);\" ng-model=\"file.fileName\"></div><span class=\"file-status ng-binding\"><i class=\"glyphicon glyphicon-refresh requesting ng-hide\" ng-show=\"file.requesting\"></i> 所有更改均已保存到云端</span><div class=\"user-info user-logined\" ng-class=\"{ &#39;user-logined&#39; : avatarid != &#39;&#39;}\"><div class=\"dropdown ng-scope\" dropdown=\"\" ng-if=\"avatarid != &#39;&#39;\" ng-class=\"{&#39;active&#39;: isOpen}\" ng-init=\"isOpen = false\" on-toggle=\"isOpen = !isOpen\"><div class=\"dropdown-toggle\" dropdown-toggle=\"\" aria-haspopup=\"true\" aria-expanded=\"false\"><img src=\"images/user.jpg\" title=\"arenzhjie\" class=\"img-circle\"> <span class=\"ng-binding\">arenzhjie</span> <span class=\"caret\"></span></div><ul class=\"dropdown-menu\"><li><a href=\"http://naotu.baidu.com/home\" target=\"_self\">我的文档</a></li><li><a href=\"http://i.baidu.com/\">个人中心</a></li><li class=\"divider\"></li><li><a href=\"http://naotu.baidu.com/user/logout\" target=\"_self\">注销</a></li></ul></div></div></header>"
+  );
+
+
   $templateCache.put('ui/directive/expandLevel/expandLevel.html',
     "<div class=\"btn-group-vertical\" dropdown is-open=\"isopen\"><button type=\"button\" class=\"btn btn-default expand\" title=\"{{ 'expandtoleaf' | lang:'ui' }}\" ng-class=\"{'active': isopen}\" ng-click=\"minder.execCommand('ExpandToLevel', 9999)\"></button> <button type=\"button\" class=\"btn btn-default expand-caption dropdown-toggle\" title=\"{{ 'expandtoleaf' | lang:'ui' }}\" dropdown-toggle><span class=\"caption\">{{ 'expandtoleaf' | lang:'ui' }}</span> <span class=\"caret\"></span> <span class=\"sr-only\">{{ 'expandtoleaf' | lang:'ui' }}</span></button><ul class=\"dropdown-menu\" role=\"menu\"><li ng-repeat=\"level in levels\"><a href ng-click=\"minder.execCommand('ExpandToLevel', level)\">{{ 'expandtolevel' + level | lang:'ui/command' }}</a></li></ul></div>"
   );
@@ -2115,6 +2120,11 @@ angular.module('kityminderEditor').run(['$templateCache', function($templateCach
 
   $templateCache.put('ui/directive/layout/layout.html',
     "<div class=\"readjust-layout\"><a ng-click=\"minder.queryCommandState('resetlayout') === -1 || minder.execCommand('resetlayout')\" class=\"btn-wrap\" ng-disabled=\"minder.queryCommandState('resetlayout') === -1\"><span class=\"btn-icon reset-layout-icon\"></span> <span class=\"btn-label\">{{ 'resetlayout' | lang: 'ui/command' }}</span></a></div>"
+  );
+
+
+  $templateCache.put('ui/directive/mainMenu/mainMenu.html',
+    "<div class=\"main-menu\" tabindex=\"-1\" style=\"left: -740px\"><ul class=\"tab-head\"><li class=\"close-menu\" ng-click=\"closeMenu()\"><i class=\"back\"></i></li><li ng-repeat=\"tab in tabs\" ng-class=\"{&#39;active&#39;: current == tab}\" ng-click=\"select(tab)\" class=\"ng-scope\"><span ng-bind=\"tab.name\" class=\"ng-binding\">新建</span></li><li ng-repeat=\"tab in tabs\" ng-class=\"{&#39;active&#39;: current == tab}\" ng-click=\"select(tab)\" class=\"ng-scope active\"><span ng-bind=\"tab.name\" class=\"ng-binding\">打开</span></li><li ng-repeat=\"tab in tabs\" ng-class=\"{&#39;active&#39;: current == tab}\" ng-click=\"select(tab)\" class=\"ng-scope\"><span ng-bind=\"tab.name\" class=\"ng-binding\">另存为</span></li><li ng-repeat=\"tab in tabs\" ng-class=\"{&#39;active&#39;: current == tab}\" ng-click=\"select(tab)\" class=\"ng-scope\"><span ng-bind=\"tab.name\" class=\"ng-binding\">共享</span></li><li ng-repeat=\"tab in tabs\" ng-class=\"{&#39;active&#39;: current == tab}\" ng-click=\"select(tab)\" class=\"ng-scope\"><span ng-bind=\"tab.name\" class=\"ng-binding\">历史版本</span></li><li ng-repeat=\"tab in tabs\" ng-class=\"{&#39;active&#39;: current == tab}\" ng-click=\"select(tab)\" class=\"ng-scope\"><span ng-bind=\"tab.name\" class=\"ng-binding\">帮助</span></li><li ng-repeat=\"tab in tabs\" ng-class=\"{&#39;active&#39;: current == tab}\" ng-click=\"select(tab)\" class=\"ng-scope\"><span ng-bind=\"tab.name\" class=\"ng-binding\">反馈</span></li></ul><div class=\"tab-body\"><h2 ng-bind=\"current.name\" class=\"title ng-binding\">打开</h2><div class=\"tab-pane\" ng-class=\"{&#39;active&#39;: current.name == &#39;新建&#39;}\"><ul class=\"template-list\"><li ng-repeat=\"t in templateList\" ng-click=\"touchFromTemplate(t)\" class=\"template-item default\"><span ng-bind=\"t.name\" class=\"ng-binding\">思维导图</span></li><li ng-repeat=\"t in templateList\" ng-click=\"touchFromTemplate(t)\" class=\"template-item structure\"><span ng-bind=\"t.name\" class=\"ng-binding\">组织结构图</span></li><li ng-repeat=\"t in templateList\" ng-click=\"touchFromTemplate(t)\" class=\"template-item filetree\"><span ng-bind=\"t.name\" class=\"ng-binding\">目录组织图</span></li><li ng-repeat=\"t in templateList\" ng-click=\"touchFromTemplate(t)\" class=\"template-item right\"><span ng-bind=\"t.name\" class=\"ng-binding\">逻辑结构图</span></li><li ng-repeat=\"t in templateList\" ng-click=\"touchFromTemplate(t)\" class=\"template-item fishbone\"><span ng-bind=\"t.name\" class=\"ng-binding\">鱼骨头图</span></li><li ng-repeat=\"t in templateList\" ng-click=\"touchFromTemplate(t)\" class=\"template-item tianpan\"><span ng-bind=\"t.name\" class=\"ng-binding\">天盘图</span></li></ul></div><div class=\"tab-pane open active\" ng-class=\"{&#39;active&#39;: current.name == &#39;打开&#39;}\"><h3 class=\"latest-files-title\">最近使用的文件</h3><ul class=\"latest-files\"></ul><a class=\"go-home ng-binding\" href=\"http://naotu.baidu.com/home\" target=\"_self\" title=\"到我的文档里查看更多\">到我的文档里查看更多..</a><div class=\"item import-file\" ng-click=\"importFile()\"><i class=\"glyphicon glyphicon-open icon\"></i> <span class=\"item-name\">打开本地文件</span> <span class=\"item-info\">上传本地脑图文件，并用脑图编辑</span></div></div><div class=\"tab-pane save-as\" ng-class=\"{&#39;active&#39;: current.name == &#39;另存为&#39;}\"><ul class=\"items\"><li class=\"item\" ng-click=\"saveAs()\"><i class=\"glyphicon glyphicon-duplicate icon\"></i> <span class=\"item-name\">另存为</span> <span class=\"item-info\">保存副本到我的文档</span></li><li class=\"item\" ng-click=\"renameDialog()\" ng-show=\"role === &#39;editor&#39;\"><i class=\"glyphicon glyphicon-edit icon\"></i> <span class=\"item-name\">重命名</span> <span class=\"item-info\">重命名此文件</span></li><li class=\"item\" ng-click=\"exportFile()\"><i class=\"glyphicon glyphicon-save icon\"></i> <span class=\"item-name\">导出</span> <span class=\"item-info\">将文件导出到本地（不包含第三方格式，.km 文件除外）</span></li></ul><h3 class=\"no-save-notice-title\">“保存”按钮在哪里？</h3><span class=\"no-save-notice-body\">没有“保存”按钮，因为正在自动保存您的脑图。</span></div><div class=\"tab-pane share\" ng-class=\"{&#39;active&#39;: current.name == &#39;共享&#39;}\"><div class=\"item share-file\" ng-click=\"share()\"><i class=\"glyphicon glyphicon-share icon\"></i> <span class=\"item-name\">与人共享</span> <span class=\"item-info\">邀请其他人查看此文档</span></div><a class=\"go-home ng-binding\" href=\"http://naotu.baidu.com/myshare\" target=\"_self\" title=\"查看已分享的文件\">查看已分享的文件..</a></div><div class=\"tab-pane version\" ng-class=\"{&#39;active&#39;: current.name == &#39;历史版本&#39;}\"><ul class=\"latest-versions\"><h3 class=\"no-history-notice\" ng-show=\"file.latestVersions.length == 0\">目前还没有历史版本</h3></ul></div><div class=\"tab-pane help\" ng-class=\"{&#39;active&#39;: current.name == &#39;帮助&#39;}\"><div class=\"item shortcut-item\" ng-click=\"shortcut()\"><i class=\"glyphicon glyphicon-flash icon\"></i> <span class=\"item-name\">快捷键</span> <span class=\"item-info\">查看脑图的快捷键</span></div></div><div class=\"tab-pane feedback\" ng-class=\"{&#39;active&#39;: current.name == &#39;反馈&#39;}\"><p>百度脑图当前版本：<a href=\"https://github.com/fex-team/kityminder-core/releases/tag/v1.4.40\" target=\"_blank\" class=\"ng-binding\">1.4.40</a></p><p>欢迎给我们反馈问题，以下是我们的反馈渠道：<br>（反馈之前您可以查看下 <a target=\"_blank\" href=\"http://naotu.baidu.com/user/faq\">FAQ</a>）</p><ul class=\"contact-content\"><li class=\"email\"><span>邮件组</span> <a href=\"mailto:kity@baidu.com?subject=%E8%84%91%E5%9B%BE%E4%BD%BF%E7%94%A8%E5%8F%8D%E9%A6%88\">kity@baidu.com</a></li><li class=\"qq\"><p><span>6群</span> <del>256469104</del> <i>(已满)</i></p><p><span>7群</span> <a>471462554</a><i>(可加)</i></p></li><li class=\"tieba\"><span>贴吧</span> <a target=\"_blank\" href=\"http://tieba.baidu.com/f?kw=%B0%D9%B6%C8%C4%D4%CD%BC\">百度脑图</a></li><li class=\"github\"><span>Github</span> <a target=\"_blank\" href=\"https://github.com/fex-team/kityminder-editor/issues/new\">Issues</a></li></ul></div></div></div>"
   );
 
 
@@ -3006,7 +3016,8 @@ angular.module('kityminderEditor')
 angular.module('kityminderEditor')
     .controller('hyperlink.ctrl', ["$scope", "$modalInstance", "link", function ($scope, $modalInstance, link) {
 
-        $scope.R_URL = /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?/;
+        var urlRegex = '^(?!mailto:)(?:(?:http|https|ftp)://)(?:\\S+(?::\\S*)?@)?(?:(?:(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[0-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))|localhost)(?::\\d{2,5})?(?:(/|\\?|#)[^\\s]*)?$';
+        $scope.R_URL = new RegExp(urlRegex, 'i');
 
         $scope.url = link.url || '';
         $scope.title = link.title || '';
@@ -3339,6 +3350,77 @@ angular.module('kityminderEditor')
 		}
 	});
 angular.module('kityminderEditor')
+	.directive('editorHead', ['config', 'minder.service', 'revokeDialog', function(config, minderService, revokeDialog) {
+		return {
+			restrict: 'EA',
+			templateUrl: 'ui/directive/editorHead/editorHead.html',
+			replace: true,
+			scope: {
+				onInit: '&'
+			},
+			link: function(scope, element, attributes) {
+
+				var $minderEditor = element.children('.minder-editor')[0];
+
+				function onInit(editor, minder) {
+					scope.onInit({
+						editor: editor,
+						minder: minder
+					});
+
+					minderService.executeCallback();
+				}
+
+				if (typeof(seajs) != 'undefined') {
+					/* global seajs */
+					seajs.config({
+						base: './src'
+					});
+
+					define('demo', function(require) {
+						var Editor = require('editor');
+
+						var editor = window.editor = new Editor($minderEditor);
+
+						if (window.localStorage.__dev_minder_content) {
+							editor.minder.importJson(JSON.parse(window.localStorage.__dev_minder_content));
+						}
+
+						editor.minder.on('contentchange', function() {
+							window.localStorage.__dev_minder_content = JSON.stringify(editor.minder.exportJson());
+						});
+
+						window.minder = window.km = editor.minder;
+
+						scope.editor = editor;
+						scope.minder = minder;
+                        scope.config = config.get();
+
+                        //scope.minder.setDefaultOptions(scope.config);
+						scope.$apply();
+
+						onInit(editor, minder);
+					});
+
+					seajs.use('demo');
+
+				} else if (window.kityminder && window.kityminder.Editor) {
+					var editor = new kityminder.Editor($minderEditor);
+
+					window.editor = scope.editor = editor;
+					window.minder = scope.minder = editor.minder;
+
+                    scope.config = config.get();
+
+                    //scope.minder.setDefaultOptions(config.getConfig());
+
+                    onInit(editor, editor.minder);
+                }
+
+			}
+		}
+	}]);
+angular.module('kityminderEditor')
     .directive('expandLevel', function() {
         return {
             restrict: 'E',
@@ -3625,6 +3707,77 @@ angular.module('kityminderEditor')
 			}
 		}
 	});
+angular.module('kityminderEditor')
+	.directive('mainMenu', ['config', 'minder.service', 'revokeDialog', function(config, minderService, revokeDialog) {
+		return {
+			restrict: 'EA',
+			templateUrl: 'ui/directive/mainMenu/mainMenu.html',
+			replace: true,
+			scope: {
+				onInit: '&'
+			},
+			link: function(scope, element, attributes) {
+
+				var $minderEditor = element.children('.minder-editor')[0];
+
+				function onInit(editor, minder) {
+					scope.onInit({
+						editor: editor,
+						minder: minder
+					});
+
+					minderService.executeCallback();
+				}
+
+				if (typeof(seajs) != 'undefined') {
+					/* global seajs */
+					seajs.config({
+						base: './src'
+					});
+
+					define('demo', function(require) {
+						var Editor = require('editor');
+
+						var editor = window.editor = new Editor($minderEditor);
+
+						if (window.localStorage.__dev_minder_content) {
+							editor.minder.importJson(JSON.parse(window.localStorage.__dev_minder_content));
+						}
+
+						editor.minder.on('contentchange', function() {
+							window.localStorage.__dev_minder_content = JSON.stringify(editor.minder.exportJson());
+						});
+
+						window.minder = window.km = editor.minder;
+
+						scope.editor = editor;
+						scope.minder = minder;
+                        scope.config = config.get();
+
+                        //scope.minder.setDefaultOptions(scope.config);
+						scope.$apply();
+
+						onInit(editor, minder);
+					});
+
+					seajs.use('demo');
+
+				} else if (window.kityminder && window.kityminder.Editor) {
+					var editor = new kityminder.Editor($minderEditor);
+
+					window.editor = scope.editor = editor;
+					window.minder = scope.minder = editor.minder;
+
+                    scope.config = config.get();
+
+                    //scope.minder.setDefaultOptions(config.getConfig());
+
+                    onInit(editor, editor.minder);
+                }
+
+			}
+		}
+	}]);
 /**
  * @fileOverview
  *

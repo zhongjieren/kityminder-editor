@@ -1,0 +1,15 @@
+<script type="text/ng-template" id="dirTreeTpl"><div class="dir-name-wrap"\n         ng-click="selectDir(dirTree.file_guid); $event.stopPropagation();"\n         ng-class="{\'selected\' : selectedDir == dirTree.file_guid}">\n\n        <span class="glyphicon glyphicon-folder-close"></span>\n        <span class="dir-name">{{ dirTree.file_name }}</span>\n    </div>\n    <ul ng-if="dirTree.children.length != 0">\n        <li ng-repeat="dirTree in dirTree.children"\n            ng-include="\'dirTreeTpl\'"\n            ng-if="(selectedFileGuids.indexOf(dirTree.file_guid) == -1)">{{ dirTree.file_name }}</li>\n    </ul></script>
+<div class="modal-header">
+	<h3 class="modal-title">请选择目录</h3>
+	<i class="glyphicon glyphicon-remove close-btn" ng-click="cancel()"></i>
+</div>
+<div class="modal-body">
+	<div class="root-dir-wrap" ng-keydown="shortCut($event);" tabindex="0">
+		<ul class="root-dir" ng-include="\'dirTreeTpl\'"></ul>
+	</div>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-primary" ng-disabled="selectedDir == \'\'"
+		ng-click="ok()">OK</button>
+	<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

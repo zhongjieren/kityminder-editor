@@ -1,0 +1,99 @@
+<table class="table table-hover table-files">
+	<thead>
+		<tr>
+			<th ng-show="fileNavigator.batchMode"><label><input
+					type="checkbox" ng-model="allSelected"
+					ng-change="setAllSelect(allSelected)"></label></th>
+			<th ng-show="fileNavigator.fields.indexOf(\'file_name\') > -1"
+				ng-click="reorder(\'file_name\')"
+				title="{{ \'click_to_sort\' | translate }}">{{"filename" |
+				translate}} <i class="glyphicon glyphicon-arrow-up"
+				ng-show="!reverse && predicate === \'file_name\'"></i> <i
+				class="glyphicon glyphicon-arrow-down"
+				ng-show="reverse && predicate === \'file_name\'"></i>
+			</th>
+			<th
+				ng-show="fileNavigator.fields.indexOf(\'last_modified_time\') > -1"
+				class="hidden-xs" ng-click="reorder(\'last_modified_time\')"
+				title="{{ \'click_to_sort\' | translate }}">{{"last_modified_time"
+				| translate}} <i class="glyphicon glyphicon-arrow-up"
+				ng-show="!reverse && predicate === \'last_modified_time\'"></i> <i
+				class="glyphicon glyphicon-arrow-down"
+				ng-show="reverse && predicate === \'last_modified_time\'"></i>
+			</th>
+			<th ng-show="fileNavigator.fields.indexOf(\'deleted_time\') > -1"
+				class="hidden-xs" ng-click="reorder(\'deleted_time\')"
+				title="{{ \'click_to_sort\' | translate }}">{{"deleted_time" |
+				translate}} <i class="glyphicon glyphicon-arrow-up"
+				ng-show="!reverse && predicate === \'deleted_time\'"></i> <i
+				class="glyphicon glyphicon-arrow-down"
+				ng-show="reverse && predicate === \'deleted_time\'"></i>
+			</th>
+			<th ng-show="fileNavigator.fields.indexOf(\'size\') > -1"
+				class="hidden-sm hidden-xs" ng-click="reorder(\'size\')"
+				title="{{ \'click_to_sort\' | translate }}">{{"size" |
+				translate}} <i class="glyphicon glyphicon-arrow-up"
+				ng-show="!reverse && predicate === \'size\'"></i> <i
+				class="glyphicon glyphicon-arrow-down"
+				ng-show="reverse && predicate === \'size\'"></i>
+			</th>
+			<th ng-show="fileNavigator.fields.indexOf(\'operation\') > -1"
+				class="text-right">{{"option" | translate}}</th>
+		</tr>
+	</thead>
+	<tbody class="file-item">
+		<tr ng-show="fileNavigator.requesting">
+			<td colspan="5">{{"loading" | translate}}...</td>
+		</tr>
+		<tr
+			ng-show="!fileNavigator.requesting && fileNavigator.fileList.length < 1">
+			<td colspan="5">{{"no_files_in_folder" | translate}}...</td>
+		</tr>
+		<tr
+			ng-repeat="item in fileNavigator.fileList | orderBy:predicate:reverse"
+			ng-show="!fileNavigator.requesting">
+			<td ng-show="fileNavigator.batchMode"><input type="checkbox"
+				ng-model="item.selected"></td>
+			<td class="col-md-6 file-name"
+				ng-show="fileNavigator.fields.indexOf(\'file_name\') > -1"><a
+				ng-href="{{ getUrl(item) }}" ng-click="open(item, $event)"
+				title="{{item.file_name}}" ng-show="fileNavigator.enableOpenFile"><i
+					class="glyphicon glyphicon-folder-close directory-icon"
+					ng-show="item.file_type === \'directory\'"></i> <i
+					class="glyphicon glyphicon-file"
+					ng-show="item.file_type === \'file\'"></i> {{ item.file_name +
+					item.ext_name }}</a> <a href title="{{item.file_name}}"
+				ng-show="!fileNavigator.enableOpenFile"><i
+					class="glyphicon glyphicon-folder-close"
+					ng-show="item.file_type === \'directory\'"></i> <i
+					class="glyphicon glyphicon-file"
+					ng-show="item.file_type === \'file\'"></i> {{ item.file_name +
+					item.ext_name }}</a></td>
+			<td class="hidden-xs" title="{{ item.last_modified_time }}"
+				ng-show="fileNavigator.fields.indexOf(\'last_modified_time\') > -1">{{item.last_modified_time
+				| timer}}</td>
+			<td class="hidden-xs" title="{{ item.deleted_time }}"
+				ng-show="fileNavigator.fields.indexOf(\'deleted_time\') > -1">{{item.deleted_time
+				| timer}}</td>
+			<td class="hidden-sm hidden-xs"
+				ng-show="item.file_type === \'file\' && fileNavigator.fields.indexOf(\'size\') > -1">{{item.size
+				| sizer}}</td>
+			<td class="hidden-sm hidden-xs"
+				ng-show="item.file_type === \'directory\' && fileNavigator.fields.indexOf(\'size\') > -1">-</td>
+			<td class="text-right"
+				ng-show="fileNavigator.fields.indexOf(\'operation\') > -1"><div
+					dropdown on-toggle="toggled(open)">
+					<span class="option-icon" dropdown-toggle><i
+						class="glyphicon glyphicon-option-vertical"></i></span>
+					<ul class="dropdown-menu option-dropdown"
+						aria-labelledby="simple-dropdown">
+						<li ng-repeat="op in fileNavigator.operation"
+							ng-show="item.file_type == \'file\' || (item.file_type == \'directory\' && op != \'share\')"><a
+							href
+							ng-click="fileNavigator.selectedList = []; fileNavigator.selectedList.push(item.file_guid); fileNavigator[op](item);">{{
+								op | translate }}</a></li>
+					</ul>
+				</div></td>
+		</tr>
+	</tbody>
+</table>

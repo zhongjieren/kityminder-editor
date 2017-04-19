@@ -1,0 +1,13 @@
+<div class="modal-header">
+	<h3 class="modal-title">{{ title }}</h3>
+	<i class="glyphicon glyphicon-remove close-btn" ng-click="cancel()"></i>
+</div>
+<div class="modal-body">
+	<input type="text" class="single-input form-control"
+		ng-keydown="shortCut($event);" ng-model="value">
+</div>
+<div class="modal-footer">
+	<button class="btn btn-primary" ng-click="ok()"
+		ng-disabled="value == \'\'">OK</button>
+	<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

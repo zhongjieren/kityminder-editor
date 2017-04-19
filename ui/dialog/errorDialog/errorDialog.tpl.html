@@ -1,0 +1,23 @@
+<div class="modal-header">
+	<h3 class="modal-title">{{ "oh_kityminder_encounter_an_error" |
+		translate }}</h3>
+	<i class="glyphicon glyphicon-remove close-btn" ng-click="cancel()"></i>
+</div>
+<div class="modal-body">
+	<span ng-bind="errorShortMsg" class="error-short-msg"></span>
+	<div>
+		<span class="error-detail-title"
+			ng-click="detailCollapsed = !detailCollapsed"><span
+			class="caret"></span> {{\'error_detail\' | translate}}</span> <span
+			class="report-bug-hint">{{
+			\'feedback_beneficial_to_developers_locate_bugs\' | translate }}</span>
+	</div>
+	<div collapse="detailCollapsed" class="clearfix">
+		<textarea class="form-control error-detail-body"
+			ng-model="errorDetail" readonly>\n        </textarea>
+		<button class="btn btn-primary copy-detail-btn"
+			clip-copy="errorDetail" clip-click="alertCopied()">{{
+			\'copy_and_feedback\' | translate }}</button>
+		<button class="btn btn-default cancel-btn" ng-click="cancel()">Cancel</button>
+	</div>
+</div>

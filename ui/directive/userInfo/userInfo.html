@@ -1,0 +1,22 @@
+<div class="user-info" ng-class="{ \'user-logined\' : avatarid != \'\'}">
+	<div class="dropdown" dropdown ng-if="avatarid != \'\'"
+		ng-class="{\'active\': isOpen}" ng-init="isOpen = false"
+		on-toggle="isOpen = !isOpen">
+		<div class="dropdown-toggle" dropdown-toggle>
+			<img src="http://tb.himg.baidu.com/sys/portrait/item/{{avatarid}}"
+				title="{{ username }}" class="img-circle"> <span>{{
+				username }}</span> <span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+			<li><a href="./home" target="_self">我的文档</a></li>
+			<li><a href="http://i.baidu.com">个人中心</a></li>
+			<li class="divider"></li>
+			<li><a href="./user/logout" target="_self">注销</a></li>
+		</ul>
+	</div>
+	<div ng-if="avatarid == \'\'"
+		ng-class="{ \'user-unlogined\' : avatarid == \'\'}">
+		<a href="/" target="_self">登录</a> <a
+			href="https://passport.baidu.com/v2/?reg">注册</a>
+	</div>
+</div>

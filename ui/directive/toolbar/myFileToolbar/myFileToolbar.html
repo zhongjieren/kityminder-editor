@@ -1,0 +1,86 @@
+<div class="row" ng-show="fileNavigator.toolbar.length > 0">
+	<div class="col-md-12 col-xs-12 toolbar">
+		<button type="button" class="btn btn-default"
+			ng-show="fileNavigator.toolbar.indexOf(\'levelUp\') > -1 && fileNavigator.parentDir != \'0\'"
+			ng-click="$state.go(\'subdir\', {dirGuid: fileNavigator.parentDir})">
+			<span class="glyphicon glyphicon-level-up"></span> {{ \'level_up\' |
+			translate }}
+		</button>
+		<button type="button" id="btn-create-km" class="btn btn-primary"
+			ng-show="fileNavigator.toolbar.indexOf(\'touch\') > -1"
+			ng-click="fileNavigator.touch()">
+			<span class="glyphicon glyphicon-plus"></span> {{ \'create_naotu\' |
+			translate }}
+		</button>
+		<button type="button" class="btn btn-default"
+			ng-show="fileNavigator.toolbar.indexOf(\'mkdir\') > -1"
+			ng-click="fileNavigator.mkdir()">
+			<span class="glyphicon glyphicon-plus"></span> {{ \'create_dir\' |
+			translate }}
+		</button>
+		<button type="button" class="btn btn-danger"
+			ng-show="fileNavigator.toolbar.indexOf(\'removeAll\') > -1"
+			ng-disabled="fileNavigator.fileList.length === 0"
+			ng-click="fileNavigator.removeAll()">
+			<span class="glyphicon glyphicon-remove-circle"></span> {{
+			\'remove_all\' | translate }}
+		</button>
+		<button type="button" class="btn btn-default"
+			ng-show="fileNavigator.toolbar.indexOf(\'revertAll\') > -1"
+			ng-disabled="fileNavigator.fileList.length === 0"
+			ng-click="fileNavigator.revertAll()">
+			<span class="glyphicon glyphicon-send"></span> {{ \'revert_all\' |
+			translate }}
+		</button>
+		<button type="button" class="btn btn-default"
+			ng-show="fileNavigator.toolbar.indexOf(\'batch\') > -1"
+			ng-click="fileNavigator.batchMode = !fileNavigator.batchMode"
+			ng-disabled="fileNavigator.fileList.length === 0"
+			ng-class="{\'active\': fileNavigator.batchMode }">
+			<i class="glyphicon glyphicon-th-list"></i> {{ \'batch_operation\' |
+			translate }}
+		</button>
+		<button type="button" class="btn btn-default"
+			ng-show="fileNavigator.toolbar.indexOf(\'rename\') > -1 && fileNavigator.batchMode"
+			ng-disabled="fileNavigator.selectedList.length == 0"
+			ng-click="fileNavigator.rename()">
+			<span class="glyphicon glyphicon-edit"></span> {{ \'rename\' |
+			translate }}
+		</button>
+		<button type="button" class="btn btn-default"
+			ng-show="fileNavigator.toolbar.indexOf(\'move\') > -1 && fileNavigator.batchMode"
+			ng-disabled="fileNavigator.selectedList.length == 0"
+			ng-click="fileNavigator.move()">
+			<span class="glyphicon glyphicon-move"></span> {{ \'move\' |
+			translate }}
+		</button>
+		<button type="button" class="btn btn-default"
+			ng-show="fileNavigator.toolbar.indexOf(\'copy\') > -1 && fileNavigator.batchMode"
+			ng-disabled="fileNavigator.selectedList.length == 0"
+			ng-click="fileNavigator.copy()">
+			<span class="glyphicon glyphicon-duplicate"></span> {{ \'copy\' |
+			translate }}
+		</button>
+		<button type="button" class="btn btn-danger"
+			ng-show="fileNavigator.toolbar.indexOf(\'delete\') > -1 && fileNavigator.batchMode"
+			ng-disabled="fileNavigator.selectedList.length == 0"
+			ng-click="fileNavigator.delete()">
+			<span class="glyphicon glyphicon-trash"></span> {{ \'delete\' |
+			translate }}
+		</button>
+		<button type="button" class="btn btn-default"
+			ng-show="fileNavigator.toolbar.indexOf(\'revert\') > -1 && fileNavigator.batchMode"
+			ng-disabled="fileNavigator.selectedList.length == 0"
+			ng-click="fileNavigator.revert()">
+			<span class="glyphicon glyphicon-circle-arrow-up"></span> {{
+			\'revert\' | translate }}
+		</button>
+		<button type="button" class="btn btn-danger"
+			ng-show="fileNavigator.toolbar.indexOf(\'remove\') > -1 && fileNavigator.batchMode"
+			ng-disabled="fileNavigator.selectedList.length == 0"
+			ng-click="fileNavigator.remove()">
+			<span class="glyphicon glyphicon-erase"></span> {{ \'remove\' |
+			translate }}
+		</button>
+	</div>
+</div>
