@@ -37,4 +37,10 @@ angular.module('kityminderEditor')
 					.getMonth()
 					+ 1 + "月" + d.getDate() + "日" : "很久以前"
 		}
-	});
+	})
+	.filter("trusted", ["$sce",
+		function(a) {
+			return function(b) {
+				return a.trustAsHtml(b)
+			}
+		}]);
