@@ -1,0 +1,6 @@
+===
+npm install -g grunt-cli ;安装grunt
+grunt build
+---
+npm install -g bower ;安装bower
+bower install
