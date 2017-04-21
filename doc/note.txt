@@ -1,0 +1,9 @@
+=====
+kityminder-core
+
+
+
+
+
+=====
+kityminder-editor

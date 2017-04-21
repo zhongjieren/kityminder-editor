@@ -1,4 +1,4 @@
-angular.module("kityminder").service("fileNavigator", ["$http", "$modal", "$translate", "$q", "memory",
+angular.module("kityminderEditor").service("fileNavigator", ["$http", "$modal", "$translate", "$q", "memory",
 	function(a, b, c, d, e) {
 		function f() {
 			function b() {

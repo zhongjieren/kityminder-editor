@@ -1,4 +1,4 @@
-angular.module("kityminder").service("file", ["$http", "$q", "memory", "cookie",
+angular.module("kityminderEditor").service("file", ["$http", "$q", "memory", "cookie",
 	function(a, b, c, d) {
 		function e() {
 			function d() {

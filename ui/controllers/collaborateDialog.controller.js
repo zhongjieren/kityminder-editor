@@ -1,4 +1,5 @@
-angular.module("kityminder").controller("collaborateDialog", ["$scope", "$modalInstance",
+angular.module("kityminderDemo")
+	.controller("collaborateDialog", ["$scope", "$modalInstance",
 	function(a, b) {
 		a.ok = function() {
 			"" != a.value && b.close(a.value)

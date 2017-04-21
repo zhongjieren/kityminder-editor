@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>KityMinder Editor - Powered By FEX</title>
+    <title>Editor</title>
 
 	<link href="favicon.ico" type="image/x-icon" rel="shortcut icon">
 
@@ -12,6 +12,12 @@
     <link rel="stylesheet" href="bower_components/hotbox/hotbox.css" />
     <link rel="stylesheet" href="bower_components/kityminder-core/dist/kityminder.core.css" />
     <link rel="stylesheet" href="bower_components/color-picker/dist/color-picker.css" />
+    
+    <!-- add start -->
+    <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css" />
+    <link rel="stylesheet" href="bower_components/angular-notify/dist/angular-notify.css" />
+	<!-- add end -->
+	
 	<!-- endbower -->
 
 	<link rel="stylesheet" href="dist/kityminder.editor.css">
@@ -63,10 +69,21 @@
 <script src="bower_components/kityminder-core/dist/kityminder.core.js"></script>
 <script src="bower_components/color-picker/dist/color-picker.js"></script>
 <script src="bower_components/seajs/dist/sea.js"></script>
+
+<!-- add start -->
+<script src="bower_components/ui-router/release/angular-ui-router.min.js"></script>
+<script src="bower_components/angular-notify/dist/angular-notify.min.js"></script>
+<script src="bower_components/angular-intro/build/angular-intro.min.js"></script>
+<script src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
+<script src="bower_components/zeroclipboard/dist/ZeroClipboard.js"></script>
+<!-- add end -->
+
 <!-- endbower -->
 
 <script src="ui/kityminder.app.js"></script>
-<!-- <script src="ui/kityminder.config.js"></script> -->
+<!-- add start -->
+<script src="ui/kityminder.config.js"></script>
+<!-- add end -->
 
 <script src="ui/service/commandBinder.service.js"></script>
 <script src="ui/service/config.service.js"></script>
@@ -77,10 +94,45 @@
 <script src="ui/service/resource.service.js"></script>
 <script src="ui/service/revokeDialog.service.js"></script>
 <script src="ui/service/server.service.js"></script>
+
+<!-- add start -->
+<script src="ui/controllers/alertDialog.controller.js"></script>
+<script src="ui/controllers/collaborateDialog.controller.js"></script>
+<script src="ui/controllers/dirTree.controller.js"></script>
+<script src="ui/controllers/errorDialog.controller.js"></script>
+<script src="ui/controllers/exportDialog.controller.js"></script>
+<script src="ui/controllers/importDialog.controller.js"></script>
+<script src="ui/controllers/myfile.controller.js"></script>
+<script src="ui/controllers/myshare.controller.js"></script>
+<script src="ui/controllers/shareDialog.controller.js"></script>
+<script src="ui/controllers/shortcutDialog.controller.js"></script>
+<script src="ui/controllers/singleInput.controller.js"></script>
+<script src="ui/controllers/trash.controller.js"></script>
+
+<script src="ui/service/server.service.js"></script>
+<script src="ui/service/cookie.service.js"></script>
+<script src="ui/service/file.service.js"></script>
+<script src="ui/service/fileList.service.js"></script>
+<script src="ui/service/fileNavigator.service.js"></script>
+
+<!-- add end -->
+
 <script src="ui/filter/lang.filter.js"></script>
 <script src="ui/dialog/hyperlink/hyperlink.ctrl.js"></script>
 <script src="ui/dialog/image/image.ctrl.js"></script>
 <script src="ui/dialog/imExportNode/imExportNode.ctrl.js"></script>
+
+<!-- add start -->
+<script src="ui/dialog/alertDialog/alertDialog.ctrl.js"></script>
+<script src="ui/dialog/collaborateDialog/collaborateDialog.ctrl.js"></script>
+<script src="ui/dialog/dirTree/dirTree.ctrl.js"></script>
+<script src="ui/dialog/errorDialog/errorDialog.ctrl.js"></script>
+<script src="ui/dialog/exportDialog/exportDialog.ctrl.js"></script>
+<script src="ui/dialog/importDialog/importDialog.ctrl.js"></script>
+<script src="ui/dialog/shareDialog/shareDialog.ctrl.js"></script>
+<script src="ui/dialog/shortcutDialog/shortcutDialog.ctrl.js"></script>
+<script src="ui/dialog/singleInput/singleInput.ctrl.js"></script> 
+<!-- add end -->
 
 <script src="ui/directive/topTab/topTab.directive.js"></script>
 <script src="ui/directive/undoRedo/undoRedo.directive.js"></script>
@@ -108,16 +160,37 @@
 <script src="ui/directive/searchBox/searchBox.directive.js"></script>
 <script src="ui/directive/searchBtn/searchBtn.directive.js"></script>
 
-
+<!-- add start -->
+<script src="ui/directive/button/fileBtn/fileBtn.directive.js"></script>
+<script src="ui/directive/fileMenu/fileMenu.directive.js"></script>
+<script src="ui/directive/filename/filename.directive.js"></script>
 <script src="ui/directive/editorHead/editorHead.directive.js"></script>
+<script src="ui/directive/list/myFileList/myFileList.directive.js"></script>
+<script src="ui/directive/mainMenu/mainMenu.directive.js"></script>
+<script src="ui/directive/menuToggler/menuToggler.directive.js"></script>
+<script src="ui/directive/moreService/moreService.directive.js"></script>
+<script src="ui/directive/noticeHeader/noticeHeader.directive.js"></script>
+<!-- <script src="ui/directive/userInfo/userInfo.directive.js"></script> -->
+
+<script src="ui/factory/httpInterceptor.factory.js"></script>
+<script src="ui/init/init.js"></script>
+
+<script src="ui/protocol/freemind.js"></script>
+<script src="ui/protocol/mindmanager.protocol.js"></script>
+<script src="ui/protocol/xmind.protocol.js"></script>
+
+<!-- add end -->
 <script>
 	angular.module('kityminderDemo', ['kityminderEditor'])
-			.controller('MainController', function($scope) {
-				$scope.initEditor = function(editor, minder) {
-					window.editor = editor;
-					window.minder = minder;
-				};
-			});
+// 	angular.module('kityminderDemo')
+			.controller('MainController', ['$scope', 'valueTransfer', function($scope, valueTransfer) {
+	            valueTransfer.role = 'editor';
+
+	            $scope.initEditor = function(editor, minder) {
+	                window.editor = editor;
+	                window.minder = minder;
+	            };
+	        }]);
 
 </script>
 

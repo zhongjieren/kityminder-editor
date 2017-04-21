@@ -3,7 +3,7 @@ angular.module('kityminderEditor')
 		return {
 			restrict: "E",
 			templateUrl: 'ui/directive/userInfo/userInfo.html",
-			replace: !0,
+			replace: true,
 			link: function(b) {
 				function c(a) {
 					if (document.cookie.length > 0) {

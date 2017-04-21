@@ -2,19 +2,19 @@
 	<div class="sidebar-collapse">
 		<ul side-navigation class="nav" id="side-menu">
 			<li
-				ng-class="{\'active\': $state.includes(\'home\') || $state.includes(\'subdir\')}"><a
+				ng-class="{'active': $state.includes('home') || $state.includes('subdir')}"><a
 				ui-sref="home"><i class="glyphicon glyphicon-home"></i> <span
-					class="nav-label">{{ \'my_file\' | translate }}</span></a></li>
+					class="nav-label">{{ 'my_file' | translate }}</span></a></li>
 			<li ui-sref-active="active"><a ui-sref="myshare"><i
 					class="glyphicon glyphicon-globe"></i> <span class="nav-label">{{
-						\'my_share\' | translate }}</span></a></li>
+						'my_share' | translate }}</span></a></li>
 			<li ui-sref-active="active"><a ui-sref="trash"><i
 					class="glyphicon glyphicon-trash"></i> <span class="nav-label">{{
-						\'trash\' | translate }}</span></a></li>
+						'trash' | translate }}</span></a></li>
 			<li><a target="_blank" href="user/faq"><i
 					class="glyphicon glyphicon-fire"></i> <span class="nav-label">FAQ</span></a></li>
 			<li><a target="_blank" href="user/changelog" class="change-log"
-				ng-class="{\'hasRead\' : hasReadLog}" ng-click="readChangeLog();"><i
+				ng-class="{'hasRead' : hasReadLog}" ng-click="readChangeLog();"><i
 					class="glyphicon glyphicon-tags"></i> <span class="nav-label">更新日志</span></a></li>
 		</ul>
 	</div>

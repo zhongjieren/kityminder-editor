@@ -1,4 +1,4 @@
-angular.module("kityminder").factory("httpInterceptor", ["$q", "$injector",
+angular.module("kityminderDemo").factory("httpInterceptor", ["$q", "$injector",
 	function(a, b) {
 		return {
 			request: function(a) {

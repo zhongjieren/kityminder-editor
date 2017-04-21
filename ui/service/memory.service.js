@@ -33,7 +33,7 @@ angular.module('kityminderEditor')
             }
             return quotaExceeded;
         }
-
+        
         return {
             get: function(key) {
                 var value = window.localStorage.getItem(key);

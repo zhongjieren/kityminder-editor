@@ -1,4 +1,4 @@
-angular.module("kityminder").directive("fileMenu", ["valueTransfer",
+angular.module("kityminderEditor").directive("fileMenu", ["valueTransfer",
 	function(a) {
 		return {
 			restrict: "E",
